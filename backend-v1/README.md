@@ -7,7 +7,7 @@
 ```shell
 mkdir backend-v1
 cd backend-v1
-# 根据提示选择配置即可 
+# 根据提示选择配置即可
 npm init vite@latest
 ```
 
@@ -58,9 +58,7 @@ vite.config.js中配置server
 
 #### 5、配置按需引入
 ```shell
-npm install less less-loader vite-plugin-style-import -D
-# vite-plugin-style-import依赖consola
-npm install consola -D
+npm install vite-plugin-imp -D
 ```
 vite.config.js
 在2.0版本需要使用的是createStyleImportPlugin不要使用styleImprot了！
@@ -68,16 +66,15 @@ vite.config.js
 import {createStyleImportPlugin} from 'vite-plugin-style-import'
     plugins: [
         react(),
-        createStyleImportPlugin({
-            libs: [
-                {
-                    libraryName: 'antd',
-                    esModule: true,
-                    resolveStyle: (name) => {
-                        return `antd/lib/${name}/style/index.less`
-                    }
-                }
-            ]
+        vitePluginImp({
+          libsList: [
+            {
+              libName: 'antd',
+              style: (name) => {
+                return `antd/es/${name}/style`
+              }
+            }
+          ]
         })
     ],
     css: {
